@@ -4,12 +4,18 @@ For my project, I will analyze data on colorectal cancers in Ethiopia, found onl
 
 ## Execute the analysis
 
-To execute the analysis, from the project folder you can run 
+To execute the analysis, please cd into `info550project` and open R.
+
+Run `renv::restore()` to synchronize package library.
+
+Build the report by running 
 
 ``` bash
-Rscript -e "rmarkdown::render('report.Rmd')"
+make report.html
 ```
 
-This will create a file called `report.html` output in your directory that contains the results.
+from the project directory. 
+
+This will create the output `Rmd/report.html`.
 
 

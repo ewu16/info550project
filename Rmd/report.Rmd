@@ -1,0 +1,60 @@
+---
+title: "Colorectal cancer: Patient characteristics and survival "
+author: "Emily Wu"
+date: "`r format(Sys.Date(), '%Y-%m-%d')`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+here::i_am("Rmd/report.Rmd")
+knitr::opts_knit$set(root.dir = here::here())
+```
+
+
+```{r load-data, include = FALSE}
+load(here::here("data", "crec.RData"))
+```
+
+Colorectal cancer (CRC) is the third most common cancer worldwide. While colorectal cancer has primarily been a concern for highly developed countries, colorectal cancer incidence rates are now rising rapidly in low to middle income countries. 
+Data on CRC in African countries, including Ethiopia, has been limited. A retrospective study from the Tikur Anbessa Specialized Hospital cancer registry provides an opportunity to better understand the characteristics, survival patterns, and prognostic factors of CRC patients in Ethiopia. 
+
+The data comes from the medical records of 161 colorectal cancer patients registered at Tikur Anbessa Specialized Hospital, the primary oncology center in Ethiopia. Patients were followed up starting from Jan 1, 2012 to Dec 31, 2016. The follow-up time was from the first date of confirmed diagnosis to the date of death, date of loss to follow up or date of last contact.
+
+### Table 1: Sociodemographic characteristics of patients
+The mean age of patients was `r round(mean(crec$age))` years (SD: `r round(sd(crec$age))`). The majority of patients were male and married, and about half of the patients resided in Addis Ababa. 
+
+```{r table1}
+knitr::include_graphics(here::here("figs", "table1.png"))
+```
+
+### Table 2: Pathological and clincial characteristics of patients
+Out of 161 colorectal cancer cases, 156 (97%) were adenocarcinoma not otherwise specified. Colorectal cancer can occur in the colon, recto-sigmoid junction, rectum or anorectal regions. The majority of patients had cancer located in the colon. About half of the patients had late tumor staged cancer. In additional, about half of the patients had metastasized cancers. 
+
+```{r table2}
+knitr::include_graphics(here::here("figs", "table2.png"))
+```
+
+### Table 3: Treatments received by patients
+Patients received different combinations of surgery, chemotherapy and radiotherapy treatments. `r sum(crec$surgery == "Yes")` patients had surgery with or without adjunctive chemotherapy and radiotherapy. 
+
+```{r table3}
+knitr::include_graphics(here::here("figs", "table3.png"))
+```
+
+
+### Survival pattern of patients
+`r sum(crec$vstatus == 1)`(`r round(sum(crec$vstatus == 1)/nrow(crec)*100)`%) patients died due to colorectal cancer over a follow-up of at most 5 years. The median follow-up time was `r round(median(crec$time))` months. The overall colorectal cancer specific survival rate was low with median survival time of 21 months.  
+
+```{r plot-km}
+knitr::include_graphics(here::here("figs", "kaplan_meier_plot.png"))
+  
+```
+
+### Proportional hazards model
+A multivariable Cox proportional hazards was fit to the survival data. Stage 4 tumor, a histologic type of Mucinous/Signet-ring cell carcinoma, elevated baseline carcinoembryonic antigen (CEA) level, and surgical treatment were associated with worsened survival outcomes. 
+
+```{r fit-cox}
+knitr::include_graphics(here::here("figs", "cox_regression_table.png"))
+```
