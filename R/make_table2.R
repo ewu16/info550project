@@ -1,7 +1,7 @@
 here::i_am("R/make_table2.R")
 
 load(here::here("data", "crec.RData"))
-
+library(webshot)
 library(gtsummary)
 
 # table of pathological/clinical characteristics of patients

@@ -1,8 +1,8 @@
 here::i_am("R/make_table1.R")
 
 load(here::here("data", "crec.RData"))
-
 library(gtsummary)
+
 
 # table of sociodemographic characteristics of patients (age, sex, marital status, region of residence)
 # with mean (sd) for continuous variables and n (%) for categorical variables
