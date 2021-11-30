@@ -1,8 +1,9 @@
 ---
-title: "Colorectal cancer: Patient characteristics and survival "
+title: 'Colorectal cancer: Patient characteristics and survival '
 author: "Emily Wu"
 date: "`r format(Sys.Date(), '%Y-%m-%d')`"
-output: html_document
+output:
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
